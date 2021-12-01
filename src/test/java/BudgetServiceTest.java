@@ -70,5 +70,13 @@ class BudgetServiceTest {
         assertEquals(544.00, budgetService.query(start, end));
     }
 
-
+    @Test
+    void test_zero_month_budget() {
+        when(mockRepo.getAll()).thenReturn(Arrays.asList(
+                new Budget("202004", 0)
+        ));
+        LocalDate start = LocalDate.of(2020, 4, 29);
+        LocalDate end = LocalDate.of(2020, 4, 30);
+        assertEquals(0, budgetService.query(start, end));
+    }
 }
